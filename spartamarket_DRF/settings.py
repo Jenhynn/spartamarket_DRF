@@ -86,6 +86,7 @@ DATABASES = {
     }
 }
 
+# Custom User Model
 AUTH_USER_MODEL = "accounts.User"
 
 
@@ -107,6 +108,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# JWT 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
