@@ -3,6 +3,6 @@ from . import views
 
 app_name = "products"
 urlpatterns = [
-    path("", views.product_list, name="product_list"),
-    path("<int:id>/", views.product_detail), # 상품 상세, 수정, 삭제
+    path("", views.ProductListAPIView.as_view(), name="product_list"),
+    path("<int:id>/", views.ProductDetailAPIView.as_view()), # 상품 상세, 수정, 삭제
 ]

@@ -2,19 +2,18 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.views import APIView
 from .models import Product
 from .serializers import ProductSerializer
+    
 
-
-# 데코레이터: wrapping 함수. python 기능이다.
-@api_view(["GET", "POST"]) # 함수형 view에는 api_view 데코레이터가 꼭 필요하다. 다른 method 가 들어오면 405 error
-def product_list(request):
-    if request.method == "GET":
+class ProductListAPIView(APIView):
+    def get(self, request):
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
-    
-    elif request.method == "POST":
+
+    def post(self, request):
         serializer = ProductSerializer(data = request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
@@ -22,21 +21,23 @@ def product_list(request):
         # return Response(serializer.errors, status=400) # valid 하지 않으면 # raise_exception = True와 같음
 
 
-@api_view(["GET", "PUT", "DELETE"])
-def product_detail(request, id):
-    if request.method == "GET":
-        product = get_object_or_404(Product, id=id)
+class ProductDetailAPIView(APIView):
+    def get_object(self, id):
+        return get_object_or_404(Product, id=id)
+    
+    def get(self, request, id):
+        product = self.get_object(id)
         serializer = ProductSerializer(product)
         return Response(serializer.data)
-        
-    elif request.method == 'PUT':
-        product = get_object_or_404(Product, id=id) # 기존의 product를 가져와서
+
+    def put(self, request, id):
+        product = self.get_object(id) # 기존의 product를 가져와서
         serializer = ProductSerializer(product, data=request.data, partial=True) # 그 자리에 data를 넣음 # partial을 넣으면 일부 필드만도 수정 가능
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
-    
-    elif request.method == "DELETE":
-        product = get_object_or_404(Product, id=id)
+
+    def delete(self, request, id):
+        product = self.get_object(id)
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
