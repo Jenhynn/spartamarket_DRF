@@ -24,7 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECRET KEY .env 설정
-
 # env = environ.Env(DEBUG=(bool, True))
 
 # environ.Env.read_env(
@@ -33,6 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRET_KEY = env('SECRET_KEY')
 
+# 실제 개발 단계에서는 위처럼 .env를 이용해서 보이지 않도록 해줘야 함.
 SECRET_KEY='django-insecure-1(jky6$p)u^1q8%q$%d=0a(azs^0c#c=fpl5rt2-4j4dlq64dw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
