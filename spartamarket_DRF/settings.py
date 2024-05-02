@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(DEBUG=(bool, True))
 
-environ.Env_read_env(
+environ.Env.read_env(
 	env_file = os.path.join(BASE_DIR, '.env')
 )
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # third-party
     'django_seed',
     'rest_framework',
+    'rest_framework.authtoken',
     # local apps
     'accounts',
     'products',
