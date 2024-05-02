@@ -8,18 +8,22 @@ from rest_framework.response import Response
 class SignupAPIView(APIView):
     def post(self, request):
         data = request.data
-        # username, email이 필수여야 함.
+
         username = data.get("username")
         email = data.get("email")
+        # username, email 입력하지 않을 시 400번 에러
         if not username or not email:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
+        # username 중복 검증
         if username == get_user_model().objects.filter(username=username).exists():
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
+        # email 중복 검증
         if email == get_user_model().objects.filter(email=email).exists():
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
+        # user 생성
         user = get_user_model().objects.create_user(
             username = username,
             email = email,
@@ -37,6 +41,7 @@ class SignupAPIView(APIView):
 
 class ProfileAPIView(APIView):
     def get(self, request, username):
+        # username으로 유저 데이터 가져오기
         user = get_object_or_404(get_user_model(), username=username)
         return Response(
             {
