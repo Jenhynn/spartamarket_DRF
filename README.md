@@ -39,3 +39,9 @@
 
 #### 로그인
 <img width="800" alt="스크린샷 2024-05-02 오후 12 13 11" src="https://github.com/Jenhynn/spartamarket_DRF/assets/159970972/6b965a95-5f95-4117-8713-4f0db28bd7f2">
+
+#### 회원가입
+<img width="800" alt="스크린샷 2024-05-02 오후 11 55 34" src="https://github.com/Jenhynn/spartamarket_DRF/assets/159970972/ce4d3f51-0628-4baf-bc39-3d063d812c06">
+
+#### 프로필 페이지 조회
+<img width="800" alt="스크린샷 2024-05-02 오후 11 55 41" src="https://github.com/Jenhynn/spartamarket_DRF/assets/159970972/d64bc083-da73-4944-b36f-23d6916448e2">
