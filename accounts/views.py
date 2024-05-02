@@ -1,11 +1,11 @@
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 
 
 class SignupAPIView(APIView):
-
     def post(self, request):
         data = request.data
         # username, email이 필수여야 함.
@@ -35,4 +35,14 @@ class SignupAPIView(APIView):
             status=status.HTTP_201_CREATED)
     
 
-# class ProfileAPIView():
+class ProfileAPIView(APIView):
+    def get(self, request, username):
+        user = get_object_or_404(get_user_model(), username=username)
+        return Response(
+            {
+                "username" : user.username,
+                "nickname" : user.nickname,
+                "email": user.email,
+                "birthdate": user.birthdate,
+            }
+        )
